@@ -1,0 +1,26 @@
+
+!
+username JMC-admin privilege 15 secret &nomore&
+!
+!
+
+
+
+^C
+!
+line con 0
+line aux 0
+line vty 0 4
+ access-class VTY&SNMP in
+ password &nomore&
+ transport input telnet ssh
+!
+scheduler max-task-time 5000
+scheduler allocate 20000 1000
+ntp source Loopback100
+ntp server 5.53.71.1 prefer
+!
+end
+
+
+wr
