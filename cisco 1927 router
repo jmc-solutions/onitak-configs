@@ -1,0 +1,569 @@
+
+
+
+
+
+
+
+
+
+
+
+Router con0 is now available
+
+
+
+
+
+Press RETURN to get started.
+
+
+
+
+
+
+*Aug  6 20:29:38.476: %SYS-5-CONFIG_I: Configured from console by console
+Router>
+Router>
+Router>
+Router>en
+Password:
+Password:
+Router#
+Router#
+Router#
+Router#show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Async1                     unassigned      YES unset  down                  down
+FastEthernet0              unassigned      YES unset  up                    up
+FastEthernet1              unassigned      YES unset  down                  down
+FastEthernet2              unassigned      YES unset  administratively down down
+FastEthernet3              unassigned      YES unset  administratively down down
+FastEthernet4              unassigned      YES unset  administratively down down
+FastEthernet5              unassigned      YES unset  administratively down down
+FastEthernet6              unassigned      YES unset  administratively down down
+FastEthernet7              unassigned      YES unset  administratively down down
+FastEthernet8              unassigned      YES unset  down                  down
+GigabitEthernet0           unassigned      YES NVRAM  down                  down
+Vlan1                      unassigned      YES unset  administratively down down
+Router#int vlan 10
+        ^
+% Invalid input detected at '^' marker.
+
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int vlan 10
+Router(config-if)#
+*Aug  6 20:43:26.344: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan10, changed state to down
+Router(config-if)#int vlan 20
+Router(config-if)#
+*Aug  6 20:43:36.724: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan20, changed state to down
+Router(config-if)#int vlan 30
+Router(config-if)#
+*Aug  6 20:43:46.420: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan30, changed state to down
+Router(config-if)#do sh ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Async1                     unassigned      YES unset  down                  down
+FastEthernet0              unassigned      YES unset  up                    up
+FastEthernet1              unassigned      YES unset  down                  down
+FastEthernet2              unassigned      YES unset  administratively down down
+FastEthernet3              unassigned      YES unset  administratively down down
+FastEthernet4              unassigned      YES unset  administratively down down
+FastEthernet5              unassigned      YES unset  administratively down down
+FastEthernet6              unassigned      YES unset  administratively down down
+FastEthernet7              unassigned      YES unset  administratively down down
+FastEthernet8              unassigned      YES unset  down                  down
+GigabitEthernet0           unassigned      YES NVRAM  down                  down
+Vlan1                      unassigned      YES unset  administratively down down
+Vlan10                     unassigned      YES unset  down                  down
+Vlan20                     unassigned      YES unset  down                  down
+Vlan30                     unassigned      YES unset  down                  down
+Router(config-if)#int vlan 10
+Router(config-if)#ip add 192.168.0.1 255.255.255.0
+Router(config-if)#no shut
+Router(config-if)#int vlan 20
+Router(config-if)#ip add 172.16.16.1 255.255.255.0
+Router(config-if)#no shut
+Router(config-if)#int vlan 30
+Router(config-if)#ip add 192.168.1.1 255.255.255.0
+Router(config-if)#no shut
+Router(config-if)#do sh ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Async1                     unassigned      YES unset  down                  down
+FastEthernet0              unassigned      YES unset  up                    up
+FastEthernet1              unassigned      YES unset  down                  down
+FastEthernet2              unassigned      YES unset  administratively down down
+FastEthernet3              unassigned      YES unset  administratively down down
+FastEthernet4              unassigned      YES unset  administratively down down
+FastEthernet5              unassigned      YES unset  administratively down down
+FastEthernet6              unassigned      YES unset  administratively down down
+FastEthernet7              unassigned      YES unset  administratively down down
+FastEthernet8              unassigned      YES unset  down                  down
+GigabitEthernet0           unassigned      YES NVRAM  down                  down
+Vlan1                      unassigned      YES unset  administratively down down
+Vlan10                     192.168.0.1     YES manual down                  down
+Vlan20                     172.16.16.1     YES manual down                  down
+Vlan30                     192.168.1.1     YES manual down                  down
+Router(config-if)#dhcp pool demo
+                   ^
+% Invalid input detected at '^' marker.
+
+Router(config-if)#ip dhcp pool demo
+Router(dhcp-config)#network 172.16.16.0
+Router(dhcp-config)#exc
+Router(dhcp-config)#excl
+Router(dhcp-config)#ex
+Router(dhcp-config)#ip exc
+Router(dhcp-config)#?
+DHCP pool configuration commands:
+  accounting           Send Accounting Start/Stop messages
+  bootfile             Boot file name
+  class                Specify a DHCP class
+  client-identifier    Client identifier
+  client-name          Client name
+  default-router       Default routers
+  dns-server           DNS servers
+  domain-name          Domain name
+  exit                 Exit from DHCP pool configuration mode
+  hardware-address     Client hardware address
+  host                 Client IP address and mask
+  import               Programatically importing DHCP option parameters
+  lease                Address lease time
+  netbios-name-server  NetBIOS (WINS) name servers
+  netbios-node-type    NetBIOS node type
+  network              Network number and mask
+  next-server          Next server in boot process
+  no                   Negate a command or set its defaults
+  odap                 Configure ODAP
+  option               Raw DHCP options
+  origin               Configure the origin of the pool
+  relay                Function as a DHCP relay
+  remember             Remember released bindings
+  renew                Configure renewal policy
+  server               Configure the server ID option value
+  subnet               Subnet allocation commands
+  update               Dynamic updates
+  utilization          Configure various utilization parameters
+  vrf                  Associate this pool with a VRF
+
+Router(dhcp-config)#ip dhcp pool office
+Router(dhcp-config)#network 192.168.1.0 255.255.255.0
+Router(dhcp-config)#ip dhcp pool office2
+Router(dhcp-config)#network 192.168.0.0 255.255.255.0
+Router(dhcp-config)#exit
+Router(config)#?
+Configure commands:
+  aaa                         Authentication, Authorization and Accounting.
+  access-list                 Add an access list entry
+  alias                       Create command alias
+  appfw                       Configure the Application Firewall policy
+  application                 Define application
+  archive                     Archive the configuration
+  arp                         Set a static ARP entry
+  async-bootp                 Modify system bootp parameters
+  authentication              Auth Manager Global Configuration Commands
+  auto                        Configure Automation
+  autoupgrade                 Auto Upgrade Manager simplifies image upgrade
+                              process
+  banner                      Define a login banner
+  bba-group                   Configure BBA Group
+  beep                        Configure BEEP (Blocks Extensible Exchange
+                              Protocol)
+  bfd                         BFD configuration commands
+  bfd-template                BFD template configuration
+  boot                        Modify system boot parameters
+  bridge                      Bridge Group.
+  buffers                     Adjust system buffer pool parameters
+  busy-message                Display message when connection to host fails
+  call                        Configure Call parameters
+  call-history-mib            Define call history mib parameters
+  call-home                   Enter call-home configuration mode
+  capf-server                 CAPF Server
+  carrier-id                  Name of the carrier associated with this trunk
+                              group
+  ccm-manager                 Call Manager
+  cdp                         Global CDP configuration subcommands
+  cef                         Cisco Express Forwarding
+  chat-script                 Define a modem chat script
+  cisp                        Set CISP parameters
+  class-map                   Configure CPL Class Map
+  clns                        Global CLNS configuration subcommands
+  clock                       Configure time-of-day clock
+  cns                         CNS agents
+  config-register             Define the configuration register
+  configuration               Configuration access
+  connect                     cross-connect two interfaces
+  content-scan                Content-Scan
+  control-plane               Configure control plane services
+  credentials                 credentials service
+  crypto                      Encryption module
+  csdb                        Common Session Database
+  ctl-client                  CTL Client
+  cts                         Cisco Trusted Security commands
+  cwmp                        Configure CPE WAN Management Protocol(CWMP)
+  default                     Set a command to its defaults
+  default-value               Default character-bits values
+  define                      interface range macro definition
+  dial-control-mib            Define Dial Control Mib parameters
+  dial-peer                   Dial Map (Peer) configuration commands
+  dialer                      Dialer commands
+  dialer-list                 Create a dialer list entry
+  dnsix-dmdp                  Provide DMDP service for DNSIX
+  dnsix-nat                   Provide DNSIX service for audit trails
+  do-exec                     To run exec commands in config mode
+  dot1x                       IEEE 802.1X Global Configuration Commands
+  downward-compatible-config  Generate a configuration compatible with older
+                              software
+  dspfarm                     Enable the dspfarm service
+  eap                         EAP Global Configuration Commands
+  emm                         Specify pre-loading of MDF
+  enable                      Modify enable password parameters
+  end                         Exit from configure mode
+  energywise                  EnergyWise Global Configuration Commands
+  eou                         EAPoUDP Global Configuration Commands
+  ephone-type                 define ethernet phone type
+  epm                         EPM Global Configuration Commands
+  errdisable                  Error disable
+  ethernet                    Ethernet configuration
+  event                       Event related configuration commands
+  exception                   Exception handling
+  exit                        Exit from configure mode
+  fax                         Configure fax parameters
+  file                        Adjust file system parameters
+  flow                        Global Flow configuration subcommands
+  flow-sampler-map            Flow sampler configuration
+  format                      Format the output
+  frame-relay                 global frame relay configuration commands
+  gateway                     Gateway
+  global-address-family       Enter address-family base routing topology mode
+  gw-accounting               Enable voip gateway accounting.
+  help                        Description of the interactive help system
+  hostname                    Set system's network name
+  http                        HTTP Config
+  ida-client                  IDA Client provides infra for communication with
+                              IDA on cisco server
+  identity                    Identity Configuration Commands
+  interface                   Select an interface to configure
+  ip                          Global IP configuration subcommands
+  ipc                         Configure IPC system
+  iphc-profile                Configure IPHC profile
+  ipv6                        Global IPv6 configuration commands
+  isis                        Global ISIS configuration subcommands
+  iua                         Configure ISDN user Adaptation Layer
+  ivr                         ivr utility command
+  ixi                         IXI Config command
+  kerberos                    Configure Kerberos
+  key                         Key management
+  kron                        Kron interval Facility
+  l2                          Layer 2 configuration
+  l2protocol-tunnel           Tunnel Layer2 protocols
+  l2tp                        Layer 2 Tunneling Protocol (L2TP) parameters
+  l2tp-class                  l2tp-class configuration
+  l3vpn                       l3vpn encapsulation ip commands
+  li-view                     LI View
+  license                     Configure license features
+  line                        Configure a terminal line
+  lldp                        Global LLDP configuration subcommands
+  logging                     Modify message logging facilities
+  login                       Enable secure login checking
+  login-string                Define a host-specific login string
+  mab                         MAC Authentication Bypass Global Configuration
+                              Commands
+  mac-address-table           Configure the MAC address table
+  mace                        Measurement Aggregation and Correlation Engine
+  macro                       Create a command macro
+  map-class                   Configure static map class
+  map-list                    Configure static map list
+  media-proxy                 Global media proxy configuration
+  mediatrace                  Mediatrace Application
+  memory                      Configure memory management
+  memory-size                 Adjust memory size by percentage
+  menu                        Define a user-interface menu
+  metadata                    Metadata Application
+  mgcp                        Enable Media Gateway Control Protocol
+  microcode                   configure microcode
+  mmoip                       Multi Media Over IP
+  modem                       Modem Management configuration commands
+  modemcap                    Modem Capabilities database
+  monitor                     Monitoring different system events
+  mpls                        Configure MPLS parameters
+  mrcp                        MRCP(Real Time Streaming Protocol) configuration
+  mta                         Configure the Mail Transfer Agent
+  multilink                   PPP multilink global configuration
+  netbios                     NETBIOS access control filtering
+  netconf                     Configure NETCONF
+  no                          Negate a command or set its defaults
+  ntp                         Configure NTP
+  num-exp                     Dial Map Number Expansion configuration commands
+  object-group                Configure ACL Object Group
+  parameter-map               parameter map
+  parser                      Configure parser
+  password                    Configure encryption password (key)
+  per-call                    Per call debug
+  pfr                         Performance Routing configuration submodes
+  pfr-map                     Create pfr-map and enter pfr-map command mode
+  policy-map                  Configure Policy Map
+  ppp                         PPP global configuration
+  privilege                   Command privilege parameters
+  process                     Configure process
+  process-max-time            Maximum time for process to run before
+                              voluntarily relinquishing processor
+  profile                     MSP Profile
+  prompt                      Set system's prompt
+  pseudowire-class            Pseudowire-class configuration
+  qos                         Global QoS configuration subcommands
+  redundancy                  Enter redundancy mode
+  regexp                      regexp commands
+  resource                    Configure Embedded Resource Manager (ERM)
+  resume-string               Define a host-specific resume string
+  rif                         Source-route RIF cache
+  rlogin                      Rlogin configuration commands
+  rmon                        Remote Monitoring
+  route-map                   Create route-map or enter route-map command mode
+  route-tag                   Route Tag
+  router                      Enable a routing process
+  rtsp                        RTSP(Real Time Streaming Protocol) configuration
+  sampler                     Define a Sampler
+  sasl                        Configure SASL
+  sccp                        Enable Skinny Client Control Protocol
+  scheduler                   Scheduler parameters
+  scripting                   Configure options for scripting languages
+  secure                      Secure image and configuration archival commands
+  security                    Infra Security CLIs
+  service                     Modify use of network based services
+  service-routing             Configure service-routing
+  shell                       Configure shell command
+  shutdown                    Shutdown system elements
+  signaling-class             Configure signaling class
+  sip-ua                      SIP User Agent (UA)
+  snmp                        Modify non engine SNMP parameters
+  snmp-server                 Modify SNMP engine parameters
+  sntp                        Configure SNTP
+  source-bridge               Source-route bridging ring groups
+  spanning-tree               Spanning Tree Subsystem
+  stackmaker                  Specify stack name and add its member
+  stacks                      Configure stacks
+  standby                     Global HSRP configuration commands
+  state-machine               Define a TCP dispatch state machine
+  stcapp                      Start SCCP Telephony Control Application
+  subscriber                  Subscriber configuration
+  subscriber-policy           Subscriber policy
+  subscription                ASNL based Subscriptions configuration
+  table-map                   Configure Table Map
+  tacacs-server               Modify TACACS query parameters
+  telephony-service           Configure Cisco Unified Communications Manager
+                              Express
+  template                    Select a template to configure
+  terminal-queue              Terminal queue commands
+  tftp-server                 Provide TFTP service for netload requests
+  time-range                  Define time range entries
+  track                       Object tracking configuration commands
+  translate                   Translate global configuration commands
+  translation-rule            Global digit manipulation and translation
+  trunk                       Global trunk configuration
+  user-group                  User Group Configuration Commands
+  username                    Establish User Name Authentication
+  virtual-profile             Virtual Profile configuration
+  virtual-template            Virtual Template configuration
+  vlan                        VLAN commands
+  vm-integration              enable in-band DTMF integration with voicemail
+                              systems
+  voice                       Global voice configuration
+  voice-card                  Configure a specific voice-card
+  voicecap                    Add a voicecap entry
+  voip-incoming               Global incoming VoIP configuration
+  vpdn                        Virtual Private Dialup Network
+  vpdn-group                  VPDN group configuration
+  vpdn-template               vpdn-template configuration
+  vrf                         VRF commands
+  vstack                      Configure vstack parameters and enable or disable
+                              SmartInstall
+  vtp                         Configure global VTP state
+  vty-async                   Enable virtual async line configuration
+  waas                        IOS Wide Area Application Services
+  warm-reboot                 Warm reboot allows quick reload in case of a
+                              crash or by request
+  webvpn                      SSL VPN Commands
+  wrr-queue                   Configure weighted round-robin xmt queues
+  wsma                        Configure Web Services Management Agents
+  x25                         X.25 Level 3
+  x29                         X29 commands
+  xconnect                    Xconnect config commands
+  xot                         Global XOT commands
+  xsm                         Configure XSM
+  zone                        FW with zoning
+  zone-pair                   Zone pair command
+
+Router(config)# ip dh
+Router(config)# ip dhcp
+Router(config)# ip dhcp?
+dhcp  dhcp-client  dhcp-server
+
+Router(config)# ip dhcp ?
+  aaa                        Configure aaa attributes
+  binding                    DHCP address bindings
+  bootp                      BOOTP specific configuration
+  class                      Configure DHCP classes
+  compatibility              Compatibility configuration
+  conflict                   DHCP address conflict parameters
+  database                   Configure DHCP database agents
+  debug                      DHCP debugs specific parameters
+  excluded-address           Prevent DHCP from assigning certain addresses
+  global-options             Configure global DHCP options
+  limit                      Limit DHCP Lease
+  limited-broadcast-address  Use all 1's broadcast address
+  ping                       Specify ping parameters used by DHCP
+  pool                       Configure DHCP address pools
+  relay                      DHCP relay agent parameters
+  remember                   Remember released bindings
+  smart-relay                Enable Smart Relay feature
+  snooping                   DHCP Snooping
+  support                    Configure support for certain features
+  update                     Configure dynamic updates
+  use                        Configure use of certain parameters during
+                             allocation
+
+Router(config)# ip dhcp exc
+Router(config)# ip dhcp excluded-address 192.168.0.1 192.168.0.10
+Router(config)#ip dh
+Router(config)#ip dhcp ex
+Router(config)#ip dhcp excluded-address 192.168.1.1 192.168.1.10
+Router(config)#ip dh
+Router(config)#ip dhcp ex
+Router(config)#ip dhcp excluded-address 172.16.16.1 172.16.16.10
+Router(config)#ip dhcp excluded-address 172.16.16.1 172.16.16.20
+Router(config)#ip dhcp excluded-address 172.16.16.1 172.16.16.120
+Router(config)#sh run
+                  ^
+% Invalid input detected at '^' marker.
+
+Router(config)#do sh run
+Building configuration...
+
+Current configuration : 2320 bytes
+!
+! Last configuration change at 20:29:38 UTC Mon Aug 6 2018
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Router
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$LROw$rq9vkjhHMnHw1Tj7mM4A31
+!
+no aaa new-model
+!
+!
+ip cef
+!
+!
+!
+!
+
+
+!
+ip dhcp excluded-address 192.168.0.1 192.168.0.10
+ip dhcp excluded-address 192.168.1.1 192.168.1.10
+ip dhcp excluded-address 172.16.16.1 172.16.16.10
+ip dhcp excluded-address 172.16.16.1 172.16.16.20
+ip dhcp excluded-address 172.16.16.1 172.16.16.120
+!
+ip dhcp pool vlan 172
+ network 172.16.16.0 255.255.255.0
+ default-router 172.16.16.1
+!
+ip dhcp pool demo
+ network 172.16.0.0 255.255.0.0
+!
+ip dhcp pool office
+ network 192.168.1.0 255.255.255.0
+!
+ip dhcp pool office2
+ network 192.168.0.0 255.255.255.0
+!
+!
+!
+no ipv6 cef
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+license udi pid CISCO891-K9 sn FGL175021XK
+!
+!
+!
+redundancy
+!
+!
+
+Router(config)#ip dhcp pool demo
+Router(dhcp-config)#network 172.16.16.0 255.255.255.0
+% A pool already exists for network 172.16.16.0 / 255.255.255.0.
+Router(dhcp-config)#exit
+Router(config)#no ip dhcp pool vlan 172
+Router(config)#ip dhcp pool demo
+Router(dhcp-config)#no network 172.16.0.0
+Router(dhcp-config)#network 172.16.16.0 255.255.255.0
+Router(dhcp-config)#ip de
+Router(dhcp-config)#ip def
+Router(dhcp-config)#ip ?
+% Unrecognized command
+Router(dhcp-config)#de
+Router(dhcp-config)#default-router 172.16.16.1
+Router(dhcp-config)#dn
+Router(dhcp-config)#dns-server 8.8.8.8 4.4.4.4
+Router(dhcp-config)#ip dhc
+Router(dhcp-config)#ip dhcp pool office
+Router(dhcp-config)#de
+Router(dhcp-config)#default-router 192.168.1.1
+Router(dhcp-config)#dn
+Router(dhcp-config)#dns-server 8.8.8.8 4.4.4.4
+Router(dhcp-config)#ip dhcp pool office2
+Router(dhcp-config)#de
+Router(dhcp-config)#default-router 192.168.0.1
+Router(dhcp-config)#dns
+Router(dhcp-config)#dns-server 8.8.8.8  4.4.4.4
+Router(dhcp-config)#exit
+Router(config)#do sh ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Async1                     unassigned      YES unset  down                  down
+FastEthernet0              unassigned      YES unset  up                    up
+FastEthernet1              unassigned      YES unset  down                  down
+FastEthernet2              unassigned      YES unset  administratively down down
+FastEthernet3              unassigned      YES unset  administratively down down
+FastEthernet4              unassigned      YES unset  administratively down down
+FastEthernet5              unassigned      YES unset  administratively down down
+FastEthernet6              unassigned      YES unset  administratively down down
+FastEthernet7              unassigned      YES unset  administratively down down
+FastEthernet8              unassigned      YES unset  down                  down
+GigabitEthernet0           unassigned      YES NVRAM  down                  down
+Vlan1                      unassigned      YES unset  administratively down down
+Vlan10                     192.168.0.1     YES manual down                  down
+Vlan20                     172.16.16.1     YES manual down                  down
+Vlan30                     192.168.1.1     YES manual down                  down
+Router(config)#do sh ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       + - replicated route, % - next hop override
+
+Gateway of last resort is not set
+
+Router(config)#
